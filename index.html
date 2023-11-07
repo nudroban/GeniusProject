@@ -2,25 +2,30 @@
 <html lang="en">
   <head>
     <script>
-        var текущийРазмер = 16; // начальный размер шрифта
-        var текст = document.getElementById("текст");
+        var text = document.getElementById("text");
+        var currentSize = parseFloat(window.getComputedStyle(text, null).getPropertyValue('font-size'));
+        var increment = 1; // Size increment
 
-        function увеличитьТекст() {
-            текущийРазмер *= 1.2;
-            текст.style.fontSize = текущийРазмер + "px";
+        function changeSize() {
+            currentSize += increment;
+            text.style.fontSize = currentSize + "px";
+
+            // Limit the maximum size to avoid infinite growth
+            if (currentSize >= 30) {
+                increment = -1; // Start decreasing size
+            } else if (currentSize <= 10) {
+                increment = 1; // Start increasing size again
+            }
         }
 
-        function уменьшитьТекст() {
-            текущийРазмер /= 1.2;
-            текст.style.fontSize = текущийРазмер + "px";
-        }
+        // Automatically change the text size every 100 milliseconds (10 times per second)
+        var intervalID = setInterval(changeSize, 100);
 
-        // Автоматическое изменение размера текста каждые 3 секунды
-        setInterval(увеличитьТекст, 3000);
-        setInterval(уменьшитьТекст, 3000);
+        // To stop the automatic size change, you can use clearInterval()
+        // Example: clearInterval(intervalID);
     </script>
 </head>
 <body>
-    <p id="текст">Этот текст автоматически меняет размер.</p>
+    <p id="text">This is text with a slow automatic size change.</p>
 </body>
 </html>
