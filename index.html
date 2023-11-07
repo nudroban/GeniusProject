@@ -1,13 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <div align="center">
-      <h1></h1>
-    </div>  
-  </body>
+    <script>
+        var текущийРазмер = 16; // начальный размер шрифта
+        var текст = document.getElementById("текст");
+
+        function увеличитьТекст() {
+            текущийРазмер *= 1.2;
+            текст.style.fontSize = текущийРазмер + "px";
+        }
+
+        function уменьшитьТекст() {
+            текущийРазмер /= 1.2;
+            текст.style.fontSize = текущийРазмер + "px";
+        }
+
+        // Автоматическое изменение размера текста каждые 3 секунды
+        setInterval(увеличитьТекст, 3000);
+        setInterval(уменьшитьТекст, 3000);
+    </script>
+</head>
+<body>
+    <p id="текст">Этот текст автоматически меняет размер.</p>
+</body>
 </html>
